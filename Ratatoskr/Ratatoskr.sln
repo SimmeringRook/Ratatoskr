@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ratatoskr_Client", "Ratatos
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ratatoskr_Server", "Ratatoskr_Server\Ratatoskr_Server.csproj", "{A74A1D82-1E14-4649-8368-936558AA863C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engine", "Engine\Engine.csproj", "{4CDCAE74-872C-4089-AF04-71D317F836EC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A74A1D82-1E14-4649-8368-936558AA863C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A74A1D82-1E14-4649-8368-936558AA863C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A74A1D82-1E14-4649-8368-936558AA863C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CDCAE74-872C-4089-AF04-71D317F836EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CDCAE74-872C-4089-AF04-71D317F836EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CDCAE74-872C-4089-AF04-71D317F836EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CDCAE74-872C-4089-AF04-71D317F836EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
