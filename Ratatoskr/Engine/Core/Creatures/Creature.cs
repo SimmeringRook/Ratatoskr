@@ -12,10 +12,18 @@ namespace Engine.Core.Creatures
     {
         public Creature(string name, int maxHealth, int hitDiceSeed)
         {
-            this.Name = name;
+            Name = name;
             MaxHealth = maxHealth;
             CurrentHealth = maxHealth;
+
             HitDice = new Dice(20, hitDiceSeed);
+
+            //BaseDamage is only used if no weapon is equipped
+            //Creature will be punching with fists
+            BaseDamage = new Dice(4);
+            BaseArmor = 8;
+
+            EquippedArmor = new List<Armor>();
         }
 
         #region Attributes
@@ -28,7 +36,10 @@ namespace Engine.Core.Creatures
         public Dice HitDice { get; private set; }
 
         // Damage
-        public int BaseDamage { get; private set; }
+        public Dice BaseDamage { get; protected set; }
+        //The "set" is protected, because a monster that can't equip a weapon
+        //say, a dog, will only use base damage - so the monster class will need
+        //to be able to adjust the damage dice slightly, maybe 1d6 instead of 1d4
         public Weapon EquippedWeapon { get; protected set; }
 
         //Armor
@@ -103,7 +114,7 @@ namespace Engine.Core.Creatures
             else
             {
                 //Otherwise, we're punching with fists
-                return BaseDamage;
+                return BaseDamage.GetRollResult();
             }
         }
 
