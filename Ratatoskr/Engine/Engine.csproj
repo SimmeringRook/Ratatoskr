@@ -41,15 +41,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Dice.cs" />
-    <Compile Include="Creatures\Creature.cs" />
-    <Compile Include="Creatures\IAttackable.cs" />
-    <Compile Include="Creatures\IKillable.cs" />
-    <Compile Include="Creatures\MonsterCreature.cs" />
-    <Compile Include="Creatures\PlayerCreature.cs" />
-    <Compile Include="Items\Armor\Armor.cs" />
-    <Compile Include="Items\Item.cs" />
-    <Compile Include="Items\Weapons\Weapon.cs" />
+    <Compile Include="Core\Creatures\Creature.cs" />
+    <Compile Include="Core\Creatures\IAttackable.cs" />
+    <Compile Include="Core\Creatures\IKillable.cs" />
+    <Compile Include="Core\Creatures\MonsterCreature.cs" />
+    <Compile Include="Core\Creatures\PlayerCreature.cs" />
+    <Compile Include="Core\Items\Armor\Armor.cs" />
+    <Compile Include="Core\Items\Item.cs" />
+    <Compile Include="Core\Items\Weapons\Weapon.cs" />
+    <Compile Include="Network\Client\Client.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Network\Server\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

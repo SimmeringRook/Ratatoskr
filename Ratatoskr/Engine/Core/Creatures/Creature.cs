@@ -1,13 +1,8 @@
-﻿using Engine.Core;
-using Engine.Items.Armor;
-using Engine.Items.Weapons;
-using System;
+﻿using Engine.Core.Items.Armor;
+using Engine.Core.Items.Weapons;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Engine.Creatures
+namespace Engine.Core.Creatures
 {
     /// <summary>
     /// The base class of every creature;

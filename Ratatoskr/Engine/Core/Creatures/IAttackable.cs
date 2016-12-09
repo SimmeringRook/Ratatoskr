@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Engine.Creatures
+﻿namespace Engine.Core.Creatures
 {
     /// <summary>
     /// These are methods that anything that can be attacked (which would be any creature)
