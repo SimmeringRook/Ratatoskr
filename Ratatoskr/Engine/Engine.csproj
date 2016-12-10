@@ -41,14 +41,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Dice.cs" />
-    <Compile Include="Core\Creatures\Creature.cs" />
+    <Compile Include="Core\Creatures\CreatureObj.cs" />
     <Compile Include="Core\Creatures\IAttackable.cs" />
     <Compile Include="Core\Creatures\IKillable.cs" />
     <Compile Include="Core\Creatures\MonsterCreature.cs" />
     <Compile Include="Core\Creatures\PlayerCreature.cs" />
-    <Compile Include="Core\Items\Armor\Armor.cs" />
-    <Compile Include="Core\Items\Item.cs" />
-    <Compile Include="Core\Items\Weapons\Weapon.cs" />
+    <Compile Include="Core\Items\Armor\ArmorObj.cs" />
+    <Compile Include="Core\Items\ItemObj.cs" />
+    <Compile Include="Core\Items\Weapons\WeaponObj.cs" />
     <Compile Include="Network\Client\Client.cs" />
     <Compile Include="Network\Message.cs" />
     <Compile Include="Network\Server\Server.cs" />

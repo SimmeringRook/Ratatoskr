@@ -3,7 +3,7 @@
 namespace Engine.Core.Items
 {
     [SerializableAttribute]
-    public class Item
+    public class ItemObj
     {
     }
 }

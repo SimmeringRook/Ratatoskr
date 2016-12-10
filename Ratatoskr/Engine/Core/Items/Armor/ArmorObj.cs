@@ -3,7 +3,7 @@
 namespace Engine.Core.Items.Armor
 {
     [SerializableAttribute]
-    public class Armor : Item
+    public class ArmorObj : ItemObj
     {
         public int ArmorRating { get; private set; }
     }

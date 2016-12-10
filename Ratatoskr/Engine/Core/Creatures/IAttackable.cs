@@ -8,6 +8,6 @@
     {
         int GetArmorRating();
         int RollDamage();
-        void Attack(Creature target);
+        void Attack(CreatureObj target);
     }
 }

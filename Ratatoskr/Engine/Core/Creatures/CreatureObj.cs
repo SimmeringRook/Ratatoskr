@@ -10,9 +10,9 @@ namespace Engine.Core.Creatures
     /// By default, every creature should be able to be Killed and be attacked
     /// </summary>
     [SerializableAttribute]
-    public class Creature : IKillable, IAttackable
+    public class CreatureObj : IKillable, IAttackable
     {
-        public Creature(string name, int maxHealth, int hitDiceSeed)
+        public CreatureObj(string name, int maxHealth, int hitDiceSeed)
         {
             Name = name;
             MaxHealth = maxHealth;
@@ -25,7 +25,7 @@ namespace Engine.Core.Creatures
             BaseDamage = new Dice(4);
             BaseArmor = 8;
 
-            EquippedArmor = new List<Armor>();
+            EquippedArmor = new List<ArmorObj>();
         }
 
         #region Attributes
@@ -42,11 +42,11 @@ namespace Engine.Core.Creatures
         //The "set" is protected, because a monster that can't equip a weapon
         //say, a dog, will only use base damage - so the monster class will need
         //to be able to adjust the damage dice slightly, maybe 1d6 instead of 1d4
-        public Weapon EquippedWeapon { get; protected set; }
+        public WeaponObj EquippedWeapon { get; protected set; }
 
         //Armor
         public int BaseArmor { get; private set; }
-        public List<Armor> EquippedArmor { get; protected set; }
+        public List<ArmorObj> EquippedArmor { get; protected set; }
         #endregion
 
         #region IKillable Methods
@@ -91,7 +91,7 @@ namespace Engine.Core.Creatures
         {
             int armorRating = BaseArmor;
             
-            foreach (Armor gear in EquippedArmor)
+            foreach (ArmorObj gear in EquippedArmor)
             {
                 if (gear != null) 
                     armorRating += gear.ArmorRating;
@@ -124,7 +124,7 @@ namespace Engine.Core.Creatures
         /// Handles a standard attack from a Creature vs another Creature
         /// </summary>
         /// <param name="target"></param>
-        public void Attack(Creature target)
+        public void Attack(CreatureObj target)
         {
          //TODO: Implement CombatResults   
             if (this.HitDice.GetRollResult() > target.GetArmorRating())
