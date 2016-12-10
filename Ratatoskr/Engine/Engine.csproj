@@ -50,6 +50,7 @@
     <Compile Include="Core\Items\Item.cs" />
     <Compile Include="Core\Items\Weapons\Weapon.cs" />
     <Compile Include="Network\Client\Client.cs" />
+    <Compile Include="Network\Message.cs" />
     <Compile Include="Network\Server\Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

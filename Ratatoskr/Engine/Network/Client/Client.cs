@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net.Sockets;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
 namespace Engine.Network.Client
@@ -40,6 +41,7 @@ namespace Engine.Network.Client
 
                 for (int i = 0; i < k; i++)
                     Console.Write(Convert.ToChar(bb[i]));
+
                 Console.WriteLine(" ");
                 tcpclnt.Close();
             }
@@ -48,6 +50,21 @@ namespace Engine.Network.Client
             {
                 Console.WriteLine("Error..... " + e.StackTrace);
             }
+        }
+
+        public static Message Serialize(object anySerializableObject)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                (new BinaryFormatter()).Serialize(memoryStream, anySerializableObject);
+                return new Message { Data = memoryStream.ToArray() };
+            }
+        }
+
+        public static object Deserialize(Message message)
+        {
+            using (var memoryStream = new MemoryStream(message.Data))
+                return (new BinaryFormatter()).Deserialize(memoryStream);
         }
     }
 }

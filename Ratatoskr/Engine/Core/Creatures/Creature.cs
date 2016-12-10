@@ -1,5 +1,6 @@
 ﻿using Engine.Core.Items.Armor;
 using Engine.Core.Items.Weapons;
+using System;
 using System.Collections.Generic;
 
 namespace Engine.Core.Creatures
@@ -8,6 +9,7 @@ namespace Engine.Core.Creatures
     /// The base class of every creature;
     /// By default, every creature should be able to be Killed and be attacked
     /// </summary>
+    [SerializableAttribute]
     public class Creature : IKillable, IAttackable
     {
         public Creature(string name, int maxHealth, int hitDiceSeed)

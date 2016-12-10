@@ -1,5 +1,8 @@
-﻿namespace Engine.Core.Items.Weapons
+﻿using System;
+
+namespace Engine.Core.Items.Weapons
 {
+    [SerializableAttribute]
     public class Weapon : Item
     {
         public Dice DamageDie { get; private set; }

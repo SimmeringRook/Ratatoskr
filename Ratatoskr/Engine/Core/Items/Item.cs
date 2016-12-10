@@ -1,5 +1,8 @@
-﻿namespace Engine.Core.Items
+﻿using System;
+
+namespace Engine.Core.Items
 {
+    [SerializableAttribute]
     public class Item
     {
     }

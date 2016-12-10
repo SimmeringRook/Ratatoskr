@@ -13,11 +13,13 @@ namespace Ratatoskr_Server
         private static Server server;
         static void Main(string[] args)
         {
-            server = new Server();
             Console.WriteLine("Enter the ip for the server to run on: ");
-
             string ip = Console.ReadLine();
-            server.Run(ip);
+            
+            server = new Server(ip);
+            server.Intialize();
+
+            
 
             Console.WriteLine("Server has safely Shutdown.");
             Console.ReadLine();

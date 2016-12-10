@@ -2,6 +2,7 @@
 
 namespace Engine.Core
 {
+    [SerializableAttribute]
     public class Dice
     {
         private int _sides;
