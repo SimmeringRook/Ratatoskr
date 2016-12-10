@@ -12,13 +12,13 @@ namespace Engine.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Tbl_Consumable
+    public partial class ArmorData
     {
         public int ItemID { get; set; }
-        public string ModifierType { get; set; }
-        public int ModiferStat { get; set; }
+        public string EquipmentSlot { get; set; }
+        public int ArmorRating { get; set; }
     
-        public virtual Tbl_ConsumableType Tbl_ConsumableType { get; set; }
-        public virtual Tbl_Item Tbl_Item { get; set; }
+        public virtual EquipmentSlotData EquipmentSlotData { get; set; }
+        public virtual ItemData ItemData { get; set; }
     }
 }

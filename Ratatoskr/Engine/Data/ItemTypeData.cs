@@ -12,17 +12,17 @@ namespace Engine.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Tbl_ConsumableType
+    public partial class ItemTypeData
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tbl_ConsumableType()
+        public ItemTypeData()
         {
-            this.Tbl_Consumable = new HashSet<Tbl_Consumable>();
+            this.ItemDatas = new HashSet<ItemData>();
         }
     
-        public string ModifierType { get; set; }
+        public string Type { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tbl_Consumable> Tbl_Consumable { get; set; }
+        public virtual ICollection<ItemData> ItemDatas { get; set; }
     }
 }

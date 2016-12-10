@@ -60,6 +60,30 @@
     <Compile Include="Core\Items\Armor\ArmorObj.cs" />
     <Compile Include="Core\Items\ItemObj.cs" />
     <Compile Include="Core\Items\Weapons\WeaponObj.cs" />
+    <Compile Include="Data\Account.cs">
+      <DependentUpon>RatatoskrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ArmorData.cs">
+      <DependentUpon>RatatoskrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ConsumableData.cs">
+      <DependentUpon>RatatoskrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ConsumableTypeData.cs">
+      <DependentUpon>RatatoskrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\CreatureData.cs">
+      <DependentUpon>RatatoskrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\EquipmentSlotData.cs">
+      <DependentUpon>RatatoskrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ItemData.cs">
+      <DependentUpon>RatatoskrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ItemTypeData.cs">
+      <DependentUpon>RatatoskrModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\RatatoskrModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -75,31 +99,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RatatoskrModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Data\Tbl_Account.cs">
-      <DependentUpon>RatatoskrModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Tbl_Armor.cs">
-      <DependentUpon>RatatoskrModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Tbl_Consumable.cs">
-      <DependentUpon>RatatoskrModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Tbl_ConsumableType.cs">
-      <DependentUpon>RatatoskrModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Tbl_Creature.cs">
-      <DependentUpon>RatatoskrModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Tbl_EquipmentSlot.cs">
-      <DependentUpon>RatatoskrModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Tbl_Item.cs">
-      <DependentUpon>RatatoskrModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Tbl_ItemType.cs">
-      <DependentUpon>RatatoskrModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Tbl_Weapon.cs">
+    <Compile Include="Data\WeaponData.cs">
       <DependentUpon>RatatoskrModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Network\Client\Client.cs" />

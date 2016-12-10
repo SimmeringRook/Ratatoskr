@@ -12,17 +12,13 @@ namespace Engine.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Tbl_ItemType
+    public partial class WeaponData
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tbl_ItemType()
-        {
-            this.Tbl_Item = new HashSet<Tbl_Item>();
-        }
+        public int ItemID { get; set; }
+        public string EquipmentSlot { get; set; }
+        public string DamageDice { get; set; }
     
-        public string Type { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tbl_Item> Tbl_Item { get; set; }
+        public virtual EquipmentSlotData EquipmentSlotData { get; set; }
+        public virtual ItemData ItemData { get; set; }
     }
 }

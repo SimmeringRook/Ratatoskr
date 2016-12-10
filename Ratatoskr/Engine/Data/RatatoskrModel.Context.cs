@@ -25,14 +25,14 @@ namespace Engine.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Tbl_Account> Tbl_Account { get; set; }
-        public virtual DbSet<Tbl_Armor> Tbl_Armor { get; set; }
-        public virtual DbSet<Tbl_Consumable> Tbl_Consumable { get; set; }
-        public virtual DbSet<Tbl_ConsumableType> Tbl_ConsumableType { get; set; }
-        public virtual DbSet<Tbl_Creature> Tbl_Creature { get; set; }
-        public virtual DbSet<Tbl_EquipmentSlot> Tbl_EquipmentSlot { get; set; }
-        public virtual DbSet<Tbl_Item> Tbl_Item { get; set; }
-        public virtual DbSet<Tbl_ItemType> Tbl_ItemType { get; set; }
-        public virtual DbSet<Tbl_Weapon> Tbl_Weapon { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<ArmorData> ArmorDatas { get; set; }
+        public virtual DbSet<ConsumableData> ConsumableDatas { get; set; }
+        public virtual DbSet<ConsumableTypeData> ConsumableTypeDatas { get; set; }
+        public virtual DbSet<CreatureData> CreatureDatas { get; set; }
+        public virtual DbSet<EquipmentSlotData> EquipmentSlotDatas { get; set; }
+        public virtual DbSet<ItemData> ItemDatas { get; set; }
+        public virtual DbSet<ItemTypeData> ItemTypeDatas { get; set; }
+        public virtual DbSet<WeaponData> WeaponDatas { get; set; }
     }
 }

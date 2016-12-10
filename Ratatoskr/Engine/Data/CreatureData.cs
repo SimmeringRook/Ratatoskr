@@ -12,23 +12,22 @@ namespace Engine.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Tbl_Creature
+    public partial class CreatureData
     {
         public int UserId { get; set; }
-        public string CharacterName { get; set; }
+        public string Name { get; set; }
         public int CurrentHitPoints { get; set; }
         public int MaxHitPoints { get; set; }
-        public string BaseDamage { get; set; }
         public int BaseArmor { get; set; }
-        public int EquippedWeapon { get; set; }
-        public Nullable<int> Armor_Head { get; set; }
-        public Nullable<int> Armor_Chest { get; set; }
-        public Nullable<int> Armor_Legs { get; set; }
+        public int EquippedWeaponID { get; set; }
+        public Nullable<int> Armor_HeadID { get; set; }
+        public Nullable<int> Armor_ChestID { get; set; }
+        public Nullable<int> Armor_LegsID { get; set; }
     
-        public virtual Tbl_Account Tbl_Account { get; set; }
-        public virtual Tbl_Item Tbl_Item { get; set; }
-        public virtual Tbl_Item Tbl_Item1 { get; set; }
-        public virtual Tbl_Item Tbl_Item2 { get; set; }
-        public virtual Tbl_Item Tbl_Item3 { get; set; }
+        public virtual Account Account { get; set; }
+        public virtual ItemData ItemData { get; set; }
+        public virtual ItemData ItemData1 { get; set; }
+        public virtual ItemData ItemData2 { get; set; }
+        public virtual ItemData ItemData3 { get; set; }
     }
 }

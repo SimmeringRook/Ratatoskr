@@ -12,20 +12,21 @@ namespace Engine.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Tbl_EquipmentSlot
+    public partial class EquipmentSlotData
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tbl_EquipmentSlot()
+        public EquipmentSlotData()
         {
-            this.Tbl_Armor = new HashSet<Tbl_Armor>();
-            this.Tbl_Weapon = new HashSet<Tbl_Weapon>();
+            this.ArmorDatas = new HashSet<ArmorData>();
+            this.WeaponDatas = new HashSet<WeaponData>();
         }
     
         public string SlotName { get; set; }
+        public int ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tbl_Armor> Tbl_Armor { get; set; }
+        public virtual ICollection<ArmorData> ArmorDatas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tbl_Weapon> Tbl_Weapon { get; set; }
+        public virtual ICollection<WeaponData> WeaponDatas { get; set; }
     }
 }

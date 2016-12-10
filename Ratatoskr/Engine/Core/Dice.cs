@@ -36,6 +36,30 @@ namespace Engine.Core
             }
         }
 
+        public Dice(string dice, int rngSeed = 0)
+        {
+            string[] partsOfDice = dice.Split('d');
+            try
+            {
+                _sides = int.Parse(partsOfDice[1]);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(string.Format("!! Error :: Attempted to Parse [{0}] into dice.", dice));
+                Console.WriteLine(string.Format("Message: {0} \nTrace:\n{1}", e.Message, e.StackTrace));
+            }
+           
+
+            if (rngSeed == 0)
+            {
+                _rng = new Random();
+            }
+            else
+            {
+                _rng = new Random(rngSeed);
+            }
+        }
+
         /// <summary>
         /// Rolls the n-Sided dice one time, returning the result of the roll.
         /// </summary>

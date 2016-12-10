@@ -12,32 +12,32 @@ namespace Engine.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Tbl_Item
+    public partial class ItemData
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tbl_Item()
+        public ItemData()
         {
-            this.Tbl_Creature = new HashSet<Tbl_Creature>();
-            this.Tbl_Creature1 = new HashSet<Tbl_Creature>();
-            this.Tbl_Creature2 = new HashSet<Tbl_Creature>();
-            this.Tbl_Creature3 = new HashSet<Tbl_Creature>();
+            this.CreatureDatas = new HashSet<CreatureData>();
+            this.CreatureDatas1 = new HashSet<CreatureData>();
+            this.CreatureDatas2 = new HashSet<CreatureData>();
+            this.CreatureDatas3 = new HashSet<CreatureData>();
         }
     
         public int ID { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
     
-        public virtual Tbl_Armor Tbl_Armor { get; set; }
-        public virtual Tbl_Consumable Tbl_Consumable { get; set; }
+        public virtual ArmorData ArmorData { get; set; }
+        public virtual ConsumableData ConsumableData { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tbl_Creature> Tbl_Creature { get; set; }
+        public virtual ICollection<CreatureData> CreatureDatas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tbl_Creature> Tbl_Creature1 { get; set; }
+        public virtual ICollection<CreatureData> CreatureDatas1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tbl_Creature> Tbl_Creature2 { get; set; }
+        public virtual ICollection<CreatureData> CreatureDatas2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tbl_Creature> Tbl_Creature3 { get; set; }
-        public virtual Tbl_ItemType Tbl_ItemType { get; set; }
-        public virtual Tbl_Weapon Tbl_Weapon { get; set; }
+        public virtual ICollection<CreatureData> CreatureDatas3 { get; set; }
+        public virtual ItemTypeData ItemTypeData { get; set; }
+        public virtual WeaponData WeaponData { get; set; }
     }
 }

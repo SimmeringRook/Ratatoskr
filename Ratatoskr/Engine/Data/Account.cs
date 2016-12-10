@@ -12,18 +12,18 @@ namespace Engine.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Tbl_Account
+    public partial class Account
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tbl_Account()
+        public Account()
         {
-            this.Tbl_Creature = new HashSet<Tbl_Creature>();
+            this.CreatureDatas = new HashSet<CreatureData>();
         }
     
         public int UserID { get; set; }
         public string AccountName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tbl_Creature> Tbl_Creature { get; set; }
+        public virtual ICollection<CreatureData> CreatureDatas { get; set; }
     }
 }
