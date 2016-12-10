@@ -30,8 +30,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,12 +60,79 @@
     <Compile Include="Core\Items\Armor\ArmorObj.cs" />
     <Compile Include="Core\Items\ItemObj.cs" />
     <Compile Include="Core\Items\Weapons\WeaponObj.cs" />
+    <Compile Include="Data\RatatoskrModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RatatoskrModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\RatatoskrModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RatatoskrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\RatatoskrModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RatatoskrModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Tbl_Account.cs">
+      <DependentUpon>RatatoskrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Tbl_Armor.cs">
+      <DependentUpon>RatatoskrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Tbl_Consumable.cs">
+      <DependentUpon>RatatoskrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Tbl_ConsumableType.cs">
+      <DependentUpon>RatatoskrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Tbl_Creature.cs">
+      <DependentUpon>RatatoskrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Tbl_EquipmentSlot.cs">
+      <DependentUpon>RatatoskrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Tbl_Item.cs">
+      <DependentUpon>RatatoskrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Tbl_ItemType.cs">
+      <DependentUpon>RatatoskrModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Tbl_Weapon.cs">
+      <DependentUpon>RatatoskrModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Network\Client\Client.cs" />
     <Compile Include="Network\Message.cs" />
     <Compile Include="Network\Server\Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.Config" />
+    <EntityDeploy Include="Data\RatatoskrModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>RatatoskrModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Data\RatatoskrModel.edmx.diagram">
+      <DependentUpon>RatatoskrModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\RatatoskrModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RatatoskrModel.edmx</DependentUpon>
+      <LastGenOutput>RatatoskrModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Data\RatatoskrModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RatatoskrModel.edmx</DependentUpon>
+      <LastGenOutput>RatatoskrModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

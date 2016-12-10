@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8f4e4ca05ca94d3ca1efc588c1c78578" Name="Diagram1" ZoomLevel="67">
+        <EntityTypeShape EntityType="Ratatoskr_DevModel.Tbl_Account" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ratatoskr_DevModel.Tbl_Armor" Width="1.5" PointX="9.625" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ratatoskr_DevModel.Tbl_Consumable" Width="1.5" PointX="9.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ratatoskr_DevModel.Tbl_ConsumableType" Width="1.5" PointX="12.375" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ratatoskr_DevModel.Tbl_Creature" Width="1.5" PointX="3.375" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ratatoskr_DevModel.Tbl_EquipmentSlot" Width="1.5" PointX="12.375" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ratatoskr_DevModel.Tbl_Item" Width="1.5" PointX="6.375" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ratatoskr_DevModel.Tbl_ItemType" Width="1.5" PointX="6.375" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ratatoskr_DevModel.Tbl_Weapon" Width="1.5" PointX="9.625" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="Ratatoskr_DevModel.FK_Tbl_Creature_Tbl_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="Ratatoskr_DevModel.FK_Tbl_Armor_Tbl_EquipmentSlots" ManuallyRouted="false" />
+        <AssociationConnector Association="Ratatoskr_DevModel.FK_Tbl_Armor_Tbl_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="Ratatoskr_DevModel.FK_Tbl_Consumable_Tbl_ConsumableType" ManuallyRouted="false" />
+        <AssociationConnector Association="Ratatoskr_DevModel.FK_Tbl_Consumable_Tbl_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="Ratatoskr_DevModel.FK_Tbl_CreatureChest_Tbl_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="Ratatoskr_DevModel.FK_Tbl_CreatureHead_Tbl_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="Ratatoskr_DevModel.FK_Tbl_CreatureLegs_Tbl_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="Ratatoskr_DevModel.FK_Tbl_CreatureWeapon_Tbl_Item" ManuallyRouted="false" />
+        <AssociationConnector Association="Ratatoskr_DevModel.FK_Tbl_Weapon_Tbl_EquipmentSlot" ManuallyRouted="false" />
+        <AssociationConnector Association="Ratatoskr_DevModel.FK_Tbl_Item_Tbl_ItemType" ManuallyRouted="false" />
+        <AssociationConnector Association="Ratatoskr_DevModel.FK_Tbl_Weapon_Tbl_Item" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

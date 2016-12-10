@@ -1,0 +1,709 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Ratatoskr_DevModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Tbl_Account">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="AccountName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Armor">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="int" Nullable="false" />
+          <Property Name="EquipmentSlot" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="ArmorRating" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Consumable">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="int" Nullable="false" />
+          <Property Name="ModifierType" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="ModiferStat" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_ConsumableType">
+          <Key>
+            <PropertyRef Name="ModifierType" />
+          </Key>
+          <Property Name="ModifierType" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Creature">
+          <Key>
+            <PropertyRef Name="CharacterName" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CharacterName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CurrentHitPoints" Type="int" Nullable="false" />
+          <Property Name="MaxHitPoints" Type="int" Nullable="false" />
+          <Property Name="BaseDamage" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="BaseArmor" Type="int" Nullable="false" />
+          <Property Name="EquippedWeapon" Type="int" Nullable="false" />
+          <Property Name="Armor_Head" Type="int" />
+          <Property Name="Armor_Chest" Type="int" />
+          <Property Name="Armor_Legs" Type="int" />
+        </EntityType>
+        <EntityType Name="Tbl_EquipmentSlot">
+          <Key>
+            <PropertyRef Name="SlotName" />
+          </Key>
+          <Property Name="SlotName" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Item">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_ItemType">
+          <Key>
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tbl_Weapon">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="int" Nullable="false" />
+          <Property Name="EquipmentSlot" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="DamageDice" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Tbl_Armor_Tbl_EquipmentSlots">
+          <End Role="Tbl_EquipmentSlot" Type="Self.Tbl_EquipmentSlot" Multiplicity="1" />
+          <End Role="Tbl_Armor" Type="Self.Tbl_Armor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_EquipmentSlot">
+              <PropertyRef Name="SlotName" />
+            </Principal>
+            <Dependent Role="Tbl_Armor">
+              <PropertyRef Name="EquipmentSlot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Armor_Tbl_Item">
+          <End Role="Tbl_Item" Type="Self.Tbl_Item" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_Armor" Type="Self.Tbl_Armor" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_Armor">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Consumable_Tbl_ConsumableType">
+          <End Role="Tbl_ConsumableType" Type="Self.Tbl_ConsumableType" Multiplicity="1" />
+          <End Role="Tbl_Consumable" Type="Self.Tbl_Consumable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_ConsumableType">
+              <PropertyRef Name="ModifierType" />
+            </Principal>
+            <Dependent Role="Tbl_Consumable">
+              <PropertyRef Name="ModifierType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Consumable_Tbl_Item">
+          <End Role="Tbl_Item" Type="Self.Tbl_Item" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_Consumable" Type="Self.Tbl_Consumable" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_Consumable">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Creature_Tbl_Account">
+          <End Role="Tbl_Account" Type="Self.Tbl_Account" Multiplicity="1" />
+          <End Role="Tbl_Creature" Type="Self.Tbl_Creature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Account">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Tbl_Creature">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_CreatureChest_Tbl_Item">
+          <End Role="Tbl_Item" Type="Self.Tbl_Item" Multiplicity="0..1" />
+          <End Role="Tbl_Creature" Type="Self.Tbl_Creature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_Creature">
+              <PropertyRef Name="Armor_Chest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_CreatureHead_Tbl_Item">
+          <End Role="Tbl_Item" Type="Self.Tbl_Item" Multiplicity="0..1" />
+          <End Role="Tbl_Creature" Type="Self.Tbl_Creature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_Creature">
+              <PropertyRef Name="Armor_Head" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_CreatureLegs_Tbl_Item">
+          <End Role="Tbl_Item" Type="Self.Tbl_Item" Multiplicity="0..1" />
+          <End Role="Tbl_Creature" Type="Self.Tbl_Creature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_Creature">
+              <PropertyRef Name="Armor_Legs" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_CreatureWeapon_Tbl_Item">
+          <End Role="Tbl_Item" Type="Self.Tbl_Item" Multiplicity="1" />
+          <End Role="Tbl_Creature" Type="Self.Tbl_Creature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_Creature">
+              <PropertyRef Name="EquippedWeapon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Item_Tbl_ItemType">
+          <End Role="Tbl_ItemType" Type="Self.Tbl_ItemType" Multiplicity="1" />
+          <End Role="Tbl_Item" Type="Self.Tbl_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_ItemType">
+              <PropertyRef Name="Type" />
+            </Principal>
+            <Dependent Role="Tbl_Item">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Weapon_Tbl_EquipmentSlot">
+          <End Role="Tbl_EquipmentSlot" Type="Self.Tbl_EquipmentSlot" Multiplicity="1" />
+          <End Role="Tbl_Weapon" Type="Self.Tbl_Weapon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_EquipmentSlot">
+              <PropertyRef Name="SlotName" />
+            </Principal>
+            <Dependent Role="Tbl_Weapon">
+              <PropertyRef Name="EquipmentSlot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Weapon_Tbl_Item">
+          <End Role="Tbl_Item" Type="Self.Tbl_Item" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_Weapon" Type="Self.Tbl_Weapon" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_Weapon">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Ratatoskr_DevModelStoreContainer">
+          <EntitySet Name="Tbl_Account" EntityType="Self.Tbl_Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Armor" EntityType="Self.Tbl_Armor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Consumable" EntityType="Self.Tbl_Consumable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_ConsumableType" EntityType="Self.Tbl_ConsumableType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Creature" EntityType="Self.Tbl_Creature" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_EquipmentSlot" EntityType="Self.Tbl_EquipmentSlot" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Item" EntityType="Self.Tbl_Item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_ItemType" EntityType="Self.Tbl_ItemType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Weapon" EntityType="Self.Tbl_Weapon" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Tbl_Armor_Tbl_EquipmentSlots" Association="Self.FK_Tbl_Armor_Tbl_EquipmentSlots">
+            <End Role="Tbl_EquipmentSlot" EntitySet="Tbl_EquipmentSlot" />
+            <End Role="Tbl_Armor" EntitySet="Tbl_Armor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Armor_Tbl_Item" Association="Self.FK_Tbl_Armor_Tbl_Item">
+            <End Role="Tbl_Item" EntitySet="Tbl_Item" />
+            <End Role="Tbl_Armor" EntitySet="Tbl_Armor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Consumable_Tbl_ConsumableType" Association="Self.FK_Tbl_Consumable_Tbl_ConsumableType">
+            <End Role="Tbl_ConsumableType" EntitySet="Tbl_ConsumableType" />
+            <End Role="Tbl_Consumable" EntitySet="Tbl_Consumable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Consumable_Tbl_Item" Association="Self.FK_Tbl_Consumable_Tbl_Item">
+            <End Role="Tbl_Item" EntitySet="Tbl_Item" />
+            <End Role="Tbl_Consumable" EntitySet="Tbl_Consumable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Creature_Tbl_Account" Association="Self.FK_Tbl_Creature_Tbl_Account">
+            <End Role="Tbl_Account" EntitySet="Tbl_Account" />
+            <End Role="Tbl_Creature" EntitySet="Tbl_Creature" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_CreatureChest_Tbl_Item" Association="Self.FK_Tbl_CreatureChest_Tbl_Item">
+            <End Role="Tbl_Item" EntitySet="Tbl_Item" />
+            <End Role="Tbl_Creature" EntitySet="Tbl_Creature" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_CreatureHead_Tbl_Item" Association="Self.FK_Tbl_CreatureHead_Tbl_Item">
+            <End Role="Tbl_Item" EntitySet="Tbl_Item" />
+            <End Role="Tbl_Creature" EntitySet="Tbl_Creature" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_CreatureLegs_Tbl_Item" Association="Self.FK_Tbl_CreatureLegs_Tbl_Item">
+            <End Role="Tbl_Item" EntitySet="Tbl_Item" />
+            <End Role="Tbl_Creature" EntitySet="Tbl_Creature" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_CreatureWeapon_Tbl_Item" Association="Self.FK_Tbl_CreatureWeapon_Tbl_Item">
+            <End Role="Tbl_Item" EntitySet="Tbl_Item" />
+            <End Role="Tbl_Creature" EntitySet="Tbl_Creature" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Item_Tbl_ItemType" Association="Self.FK_Tbl_Item_Tbl_ItemType">
+            <End Role="Tbl_ItemType" EntitySet="Tbl_ItemType" />
+            <End Role="Tbl_Item" EntitySet="Tbl_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Weapon_Tbl_EquipmentSlot" Association="Self.FK_Tbl_Weapon_Tbl_EquipmentSlot">
+            <End Role="Tbl_EquipmentSlot" EntitySet="Tbl_EquipmentSlot" />
+            <End Role="Tbl_Weapon" EntitySet="Tbl_Weapon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Weapon_Tbl_Item" Association="Self.FK_Tbl_Weapon_Tbl_Item">
+            <End Role="Tbl_Item" EntitySet="Tbl_Item" />
+            <End Role="Tbl_Weapon" EntitySet="Tbl_Weapon" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Ratatoskr_DevModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Tbl_Account">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="AccountName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Creature" Relationship="Self.FK_Tbl_Creature_Tbl_Account" FromRole="Tbl_Account" ToRole="Tbl_Creature" />
+        </EntityType>
+        <EntityType Name="Tbl_Armor">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="Int32" Nullable="false" />
+          <Property Name="EquipmentSlot" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ArmorRating" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_EquipmentSlot" Relationship="Self.FK_Tbl_Armor_Tbl_EquipmentSlots" FromRole="Tbl_Armor" ToRole="Tbl_EquipmentSlot" />
+          <NavigationProperty Name="Tbl_Item" Relationship="Self.FK_Tbl_Armor_Tbl_Item" FromRole="Tbl_Armor" ToRole="Tbl_Item" />
+        </EntityType>
+        <EntityType Name="Tbl_Consumable">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="Int32" Nullable="false" />
+          <Property Name="ModifierType" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ModiferStat" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_ConsumableType" Relationship="Self.FK_Tbl_Consumable_Tbl_ConsumableType" FromRole="Tbl_Consumable" ToRole="Tbl_ConsumableType" />
+          <NavigationProperty Name="Tbl_Item" Relationship="Self.FK_Tbl_Consumable_Tbl_Item" FromRole="Tbl_Consumable" ToRole="Tbl_Item" />
+        </EntityType>
+        <EntityType Name="Tbl_ConsumableType">
+          <Key>
+            <PropertyRef Name="ModifierType" />
+          </Key>
+          <Property Name="ModifierType" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Consumable" Relationship="Self.FK_Tbl_Consumable_Tbl_ConsumableType" FromRole="Tbl_ConsumableType" ToRole="Tbl_Consumable" />
+        </EntityType>
+        <EntityType Name="Tbl_Creature">
+          <Key>
+            <PropertyRef Name="CharacterName" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CharacterName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CurrentHitPoints" Type="Int32" Nullable="false" />
+          <Property Name="MaxHitPoints" Type="Int32" Nullable="false" />
+          <Property Name="BaseDamage" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="BaseArmor" Type="Int32" Nullable="false" />
+          <Property Name="EquippedWeapon" Type="Int32" Nullable="false" />
+          <Property Name="Armor_Head" Type="Int32" />
+          <Property Name="Armor_Chest" Type="Int32" />
+          <Property Name="Armor_Legs" Type="Int32" />
+          <NavigationProperty Name="Tbl_Account" Relationship="Self.FK_Tbl_Creature_Tbl_Account" FromRole="Tbl_Creature" ToRole="Tbl_Account" />
+          <NavigationProperty Name="Tbl_Item" Relationship="Self.FK_Tbl_CreatureChest_Tbl_Item" FromRole="Tbl_Creature" ToRole="Tbl_Item" />
+          <NavigationProperty Name="Tbl_Item1" Relationship="Self.FK_Tbl_CreatureHead_Tbl_Item" FromRole="Tbl_Creature" ToRole="Tbl_Item" />
+          <NavigationProperty Name="Tbl_Item2" Relationship="Self.FK_Tbl_CreatureLegs_Tbl_Item" FromRole="Tbl_Creature" ToRole="Tbl_Item" />
+          <NavigationProperty Name="Tbl_Item3" Relationship="Self.FK_Tbl_CreatureWeapon_Tbl_Item" FromRole="Tbl_Creature" ToRole="Tbl_Item" />
+        </EntityType>
+        <EntityType Name="Tbl_EquipmentSlot">
+          <Key>
+            <PropertyRef Name="SlotName" />
+          </Key>
+          <Property Name="SlotName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Armor" Relationship="Self.FK_Tbl_Armor_Tbl_EquipmentSlots" FromRole="Tbl_EquipmentSlot" ToRole="Tbl_Armor" />
+          <NavigationProperty Name="Tbl_Weapon" Relationship="Self.FK_Tbl_Weapon_Tbl_EquipmentSlot" FromRole="Tbl_EquipmentSlot" ToRole="Tbl_Weapon" />
+        </EntityType>
+        <EntityType Name="Tbl_Item">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Armor" Relationship="Self.FK_Tbl_Armor_Tbl_Item" FromRole="Tbl_Item" ToRole="Tbl_Armor" />
+          <NavigationProperty Name="Tbl_Consumable" Relationship="Self.FK_Tbl_Consumable_Tbl_Item" FromRole="Tbl_Item" ToRole="Tbl_Consumable" />
+          <NavigationProperty Name="Tbl_Creature" Relationship="Self.FK_Tbl_CreatureChest_Tbl_Item" FromRole="Tbl_Item" ToRole="Tbl_Creature" />
+          <NavigationProperty Name="Tbl_Creature1" Relationship="Self.FK_Tbl_CreatureHead_Tbl_Item" FromRole="Tbl_Item" ToRole="Tbl_Creature" />
+          <NavigationProperty Name="Tbl_Creature2" Relationship="Self.FK_Tbl_CreatureLegs_Tbl_Item" FromRole="Tbl_Item" ToRole="Tbl_Creature" />
+          <NavigationProperty Name="Tbl_Creature3" Relationship="Self.FK_Tbl_CreatureWeapon_Tbl_Item" FromRole="Tbl_Item" ToRole="Tbl_Creature" />
+          <NavigationProperty Name="Tbl_ItemType" Relationship="Self.FK_Tbl_Item_Tbl_ItemType" FromRole="Tbl_Item" ToRole="Tbl_ItemType" />
+          <NavigationProperty Name="Tbl_Weapon" Relationship="Self.FK_Tbl_Weapon_Tbl_Item" FromRole="Tbl_Item" ToRole="Tbl_Weapon" />
+        </EntityType>
+        <EntityType Name="Tbl_ItemType">
+          <Key>
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_Item" Relationship="Self.FK_Tbl_Item_Tbl_ItemType" FromRole="Tbl_ItemType" ToRole="Tbl_Item" />
+        </EntityType>
+        <EntityType Name="Tbl_Weapon">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="Int32" Nullable="false" />
+          <Property Name="EquipmentSlot" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="DamageDice" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tbl_EquipmentSlot" Relationship="Self.FK_Tbl_Weapon_Tbl_EquipmentSlot" FromRole="Tbl_Weapon" ToRole="Tbl_EquipmentSlot" />
+          <NavigationProperty Name="Tbl_Item" Relationship="Self.FK_Tbl_Weapon_Tbl_Item" FromRole="Tbl_Weapon" ToRole="Tbl_Item" />
+        </EntityType>
+        <Association Name="FK_Tbl_Creature_Tbl_Account">
+          <End Role="Tbl_Account" Type="Self.Tbl_Account" Multiplicity="1" />
+          <End Role="Tbl_Creature" Type="Self.Tbl_Creature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Account">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Tbl_Creature">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Armor_Tbl_EquipmentSlots">
+          <End Role="Tbl_EquipmentSlot" Type="Self.Tbl_EquipmentSlot" Multiplicity="1" />
+          <End Role="Tbl_Armor" Type="Self.Tbl_Armor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_EquipmentSlot">
+              <PropertyRef Name="SlotName" />
+            </Principal>
+            <Dependent Role="Tbl_Armor">
+              <PropertyRef Name="EquipmentSlot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Armor_Tbl_Item">
+          <End Role="Tbl_Item" Type="Self.Tbl_Item" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_Armor" Type="Self.Tbl_Armor" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_Armor">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Consumable_Tbl_ConsumableType">
+          <End Role="Tbl_ConsumableType" Type="Self.Tbl_ConsumableType" Multiplicity="1" />
+          <End Role="Tbl_Consumable" Type="Self.Tbl_Consumable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_ConsumableType">
+              <PropertyRef Name="ModifierType" />
+            </Principal>
+            <Dependent Role="Tbl_Consumable">
+              <PropertyRef Name="ModifierType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Consumable_Tbl_Item">
+          <End Role="Tbl_Item" Type="Self.Tbl_Item" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_Consumable" Type="Self.Tbl_Consumable" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_Consumable">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_CreatureChest_Tbl_Item">
+          <End Role="Tbl_Item" Type="Self.Tbl_Item" Multiplicity="0..1" />
+          <End Role="Tbl_Creature" Type="Self.Tbl_Creature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_Creature">
+              <PropertyRef Name="Armor_Chest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_CreatureHead_Tbl_Item">
+          <End Role="Tbl_Item" Type="Self.Tbl_Item" Multiplicity="0..1" />
+          <End Role="Tbl_Creature" Type="Self.Tbl_Creature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_Creature">
+              <PropertyRef Name="Armor_Head" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_CreatureLegs_Tbl_Item">
+          <End Role="Tbl_Item" Type="Self.Tbl_Item" Multiplicity="0..1" />
+          <End Role="Tbl_Creature" Type="Self.Tbl_Creature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_Creature">
+              <PropertyRef Name="Armor_Legs" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_CreatureWeapon_Tbl_Item">
+          <End Role="Tbl_Item" Type="Self.Tbl_Item" Multiplicity="1" />
+          <End Role="Tbl_Creature" Type="Self.Tbl_Creature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_Creature">
+              <PropertyRef Name="EquippedWeapon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Weapon_Tbl_EquipmentSlot">
+          <End Role="Tbl_EquipmentSlot" Type="Self.Tbl_EquipmentSlot" Multiplicity="1" />
+          <End Role="Tbl_Weapon" Type="Self.Tbl_Weapon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_EquipmentSlot">
+              <PropertyRef Name="SlotName" />
+            </Principal>
+            <Dependent Role="Tbl_Weapon">
+              <PropertyRef Name="EquipmentSlot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Item_Tbl_ItemType">
+          <End Role="Tbl_ItemType" Type="Self.Tbl_ItemType" Multiplicity="1" />
+          <End Role="Tbl_Item" Type="Self.Tbl_Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_ItemType">
+              <PropertyRef Name="Type" />
+            </Principal>
+            <Dependent Role="Tbl_Item">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Weapon_Tbl_Item">
+          <End Role="Tbl_Item" Type="Self.Tbl_Item" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tbl_Weapon" Type="Self.Tbl_Weapon" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tbl_Weapon">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RatatoskrContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Tbl_Account" EntityType="Self.Tbl_Account" />
+          <EntitySet Name="Tbl_Armor" EntityType="Self.Tbl_Armor" />
+          <EntitySet Name="Tbl_Consumable" EntityType="Self.Tbl_Consumable" />
+          <EntitySet Name="Tbl_ConsumableType" EntityType="Self.Tbl_ConsumableType" />
+          <EntitySet Name="Tbl_Creature" EntityType="Self.Tbl_Creature" />
+          <EntitySet Name="Tbl_EquipmentSlot" EntityType="Self.Tbl_EquipmentSlot" />
+          <EntitySet Name="Tbl_Item" EntityType="Self.Tbl_Item" />
+          <EntitySet Name="Tbl_ItemType" EntityType="Self.Tbl_ItemType" />
+          <EntitySet Name="Tbl_Weapon" EntityType="Self.Tbl_Weapon" />
+          <AssociationSet Name="FK_Tbl_Creature_Tbl_Account" Association="Self.FK_Tbl_Creature_Tbl_Account">
+            <End Role="Tbl_Account" EntitySet="Tbl_Account" />
+            <End Role="Tbl_Creature" EntitySet="Tbl_Creature" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Armor_Tbl_EquipmentSlots" Association="Self.FK_Tbl_Armor_Tbl_EquipmentSlots">
+            <End Role="Tbl_EquipmentSlot" EntitySet="Tbl_EquipmentSlot" />
+            <End Role="Tbl_Armor" EntitySet="Tbl_Armor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Armor_Tbl_Item" Association="Self.FK_Tbl_Armor_Tbl_Item">
+            <End Role="Tbl_Item" EntitySet="Tbl_Item" />
+            <End Role="Tbl_Armor" EntitySet="Tbl_Armor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Consumable_Tbl_ConsumableType" Association="Self.FK_Tbl_Consumable_Tbl_ConsumableType">
+            <End Role="Tbl_ConsumableType" EntitySet="Tbl_ConsumableType" />
+            <End Role="Tbl_Consumable" EntitySet="Tbl_Consumable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Consumable_Tbl_Item" Association="Self.FK_Tbl_Consumable_Tbl_Item">
+            <End Role="Tbl_Item" EntitySet="Tbl_Item" />
+            <End Role="Tbl_Consumable" EntitySet="Tbl_Consumable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_CreatureChest_Tbl_Item" Association="Self.FK_Tbl_CreatureChest_Tbl_Item">
+            <End Role="Tbl_Item" EntitySet="Tbl_Item" />
+            <End Role="Tbl_Creature" EntitySet="Tbl_Creature" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_CreatureHead_Tbl_Item" Association="Self.FK_Tbl_CreatureHead_Tbl_Item">
+            <End Role="Tbl_Item" EntitySet="Tbl_Item" />
+            <End Role="Tbl_Creature" EntitySet="Tbl_Creature" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_CreatureLegs_Tbl_Item" Association="Self.FK_Tbl_CreatureLegs_Tbl_Item">
+            <End Role="Tbl_Item" EntitySet="Tbl_Item" />
+            <End Role="Tbl_Creature" EntitySet="Tbl_Creature" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_CreatureWeapon_Tbl_Item" Association="Self.FK_Tbl_CreatureWeapon_Tbl_Item">
+            <End Role="Tbl_Item" EntitySet="Tbl_Item" />
+            <End Role="Tbl_Creature" EntitySet="Tbl_Creature" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Weapon_Tbl_EquipmentSlot" Association="Self.FK_Tbl_Weapon_Tbl_EquipmentSlot">
+            <End Role="Tbl_EquipmentSlot" EntitySet="Tbl_EquipmentSlot" />
+            <End Role="Tbl_Weapon" EntitySet="Tbl_Weapon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Item_Tbl_ItemType" Association="Self.FK_Tbl_Item_Tbl_ItemType">
+            <End Role="Tbl_ItemType" EntitySet="Tbl_ItemType" />
+            <End Role="Tbl_Item" EntitySet="Tbl_Item" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Weapon_Tbl_Item" Association="Self.FK_Tbl_Weapon_Tbl_Item">
+            <End Role="Tbl_Item" EntitySet="Tbl_Item" />
+            <End Role="Tbl_Weapon" EntitySet="Tbl_Weapon" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Ratatoskr_DevModelStoreContainer" CdmEntityContainer="RatatoskrContext">
+          <EntitySetMapping Name="Tbl_Account">
+            <EntityTypeMapping TypeName="Ratatoskr_DevModel.Tbl_Account">
+              <MappingFragment StoreEntitySet="Tbl_Account">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Armor">
+            <EntityTypeMapping TypeName="Ratatoskr_DevModel.Tbl_Armor">
+              <MappingFragment StoreEntitySet="Tbl_Armor">
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="EquipmentSlot" ColumnName="EquipmentSlot" />
+                <ScalarProperty Name="ArmorRating" ColumnName="ArmorRating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Consumable">
+            <EntityTypeMapping TypeName="Ratatoskr_DevModel.Tbl_Consumable">
+              <MappingFragment StoreEntitySet="Tbl_Consumable">
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="ModifierType" ColumnName="ModifierType" />
+                <ScalarProperty Name="ModiferStat" ColumnName="ModiferStat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_ConsumableType">
+            <EntityTypeMapping TypeName="Ratatoskr_DevModel.Tbl_ConsumableType">
+              <MappingFragment StoreEntitySet="Tbl_ConsumableType">
+                <ScalarProperty Name="ModifierType" ColumnName="ModifierType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Creature">
+            <EntityTypeMapping TypeName="Ratatoskr_DevModel.Tbl_Creature">
+              <MappingFragment StoreEntitySet="Tbl_Creature">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CharacterName" ColumnName="CharacterName" />
+                <ScalarProperty Name="CurrentHitPoints" ColumnName="CurrentHitPoints" />
+                <ScalarProperty Name="MaxHitPoints" ColumnName="MaxHitPoints" />
+                <ScalarProperty Name="BaseDamage" ColumnName="BaseDamage" />
+                <ScalarProperty Name="BaseArmor" ColumnName="BaseArmor" />
+                <ScalarProperty Name="EquippedWeapon" ColumnName="EquippedWeapon" />
+                <ScalarProperty Name="Armor_Head" ColumnName="Armor_Head" />
+                <ScalarProperty Name="Armor_Chest" ColumnName="Armor_Chest" />
+                <ScalarProperty Name="Armor_Legs" ColumnName="Armor_Legs" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_EquipmentSlot">
+            <EntityTypeMapping TypeName="Ratatoskr_DevModel.Tbl_EquipmentSlot">
+              <MappingFragment StoreEntitySet="Tbl_EquipmentSlot">
+                <ScalarProperty Name="SlotName" ColumnName="SlotName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Item">
+            <EntityTypeMapping TypeName="Ratatoskr_DevModel.Tbl_Item">
+              <MappingFragment StoreEntitySet="Tbl_Item">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_ItemType">
+            <EntityTypeMapping TypeName="Ratatoskr_DevModel.Tbl_ItemType">
+              <MappingFragment StoreEntitySet="Tbl_ItemType">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Weapon">
+            <EntityTypeMapping TypeName="Ratatoskr_DevModel.Tbl_Weapon">
+              <MappingFragment StoreEntitySet="Tbl_Weapon">
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="EquipmentSlot" ColumnName="EquipmentSlot" />
+                <ScalarProperty Name="DamageDice" ColumnName="DamageDice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
